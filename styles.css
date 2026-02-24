@@ -234,6 +234,8 @@ body {
     flex-direction: column;
     cursor: pointer;
     gap: 6px;
+    padding: 8px;
+    z-index: 1001;
 }
 
 .hamburger span {
@@ -1127,6 +1129,7 @@ body {
         padding: var(--spacing-lg);
         gap: var(--spacing-md);
         border-bottom: 1px solid var(--border-color);
+        z-index: 999;
     }
 
     .nav-menu.active {
