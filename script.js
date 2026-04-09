@@ -136,9 +136,7 @@ function showNotification(message, type = 'success') {
 /**
  * Handle form submission
  */
-contactForm.addEventListener('submit', async (e) => {
-    e.preventDefault();
-
+contactForm.addEventListener('submit', (e) => {
     // Get form values
     const name = document.getElementById('name').value.trim();
     const email = document.getElementById('email').value.trim();
@@ -147,33 +145,27 @@ contactForm.addEventListener('submit', async (e) => {
 
     // Validation
     if (!name || !email || !subject || !message) {
+        e.preventDefault();
         showNotification('Please fill out all fields', 'error');
         return;
     }
 
     if (!validateEmail(email)) {
+        e.preventDefault();
         showNotification('Please enter a valid email address', 'error');
         return;
     }
 
     if (message.length < 10) {
+        e.preventDefault();
         showNotification('Message must be at least 10 characters', 'error');
         return;
     }
 
-    // Show success (in production, you would send this to a backend)
-    showNotification('Message sent successfully! Thank you for reaching out.', 'success');
-
-    // Reset form
-    contactForm.reset();
-
-    // Here you would typically send the form data to your backend
-    // Example:
-    // await fetch('/api/contact', {
-    //     method: 'POST',
-    //     headers: { 'Content-Type': 'application/json' },
-    //     body: JSON.stringify({ name, email, subject, message })
-    // });
+    // Allow the form to submit naturally to FormSubmit
+    // Change button text to indicate progress
+    const submitBtn = contactForm.querySelector('button[type="submit"]');
+    submitBtn.textContent = 'Sending...';
 });
 
 // ==========================================
